@@ -5,7 +5,7 @@ import { useActionState } from "react";
 import { logIn } from "@/lib/actions/auth";
 import { FormNotice } from "@/components/FormNotice";
 import { SubmitButton } from "@/components/SubmitButton";
-import { HouseTokenIcon } from "@/components/icons";
+import { BrandLogo } from "@/components/BrandLogo";
 import { useActionToast } from "@/lib/useActionToast";
 
 export default function LoginPage() {
@@ -15,8 +15,8 @@ export default function LoginPage() {
   return (
     <main className="flex flex-1 items-center justify-center px-6 py-16">
       <div className="w-full max-w-sm">
-        <Link href="/" className="type-board-medium mb-8 flex items-center justify-center gap-2 text-center">
-          <HouseTokenIcon /> House<span className="text-[#f7941d]">Draft</span>
+        <Link href="/" className="mb-8 flex justify-center" aria-label="House Draft home">
+          <BrandLogo variant="auth" priority />
         </Link>
         <div className="card p-8">
           <h1 className="type-instruction-heading-medium">Welcome back to the house</h1>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { HouseTokenIcon, ReceiptIcon, CrownIcon, SwapArrowsIcon, TrophyIcon } from "@/components/icons";
+import { BrandLogo } from "@/components/BrandLogo";
+import { ReceiptIcon, CrownIcon, SwapArrowsIcon, TrophyIcon } from "@/components/icons";
 
 const FEATURES = [
   {
@@ -29,10 +30,8 @@ export default function LandingPage() {
   return (
     <main className="flex flex-1 flex-col">
       <header className="border-b-2 border-black bg-white shadow-[0_3px_0_rgba(0,0,0,0.15)]">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-5">
-          <span className="type-board-medium flex items-center gap-2">
-            <HouseTokenIcon /> House<span className="text-[#f7941d]">Draft</span>
-          </span>
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-6 py-4">
+          <BrandLogo priority />
           <nav className="flex items-center gap-3">
             <Link href="/login" className="btn-secondary">
               Log in
@@ -45,6 +44,7 @@ export default function LandingPage() {
       </header>
 
       <section className="mx-auto flex w-full max-w-5xl flex-col items-center px-6 py-16 text-center">
+        <BrandLogo variant="hero" priority className="mb-4" />
         <Badge className="bg-[#fef200] text-black">
           Fantasy leagues for reality TV
         </Badge>

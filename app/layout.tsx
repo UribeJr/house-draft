@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "HouseDraft — Draft the House. Win Eviction Night.",
+  title: "Big Brother House Draft — Draft the House. Win Eviction Night.",
   description:
-    "Fantasy leagues for reality competition seasons. Draft houseguests, score every twist, and crown a league champion at the finale.",
+    "Fantasy leagues for Big Brother seasons. Draft houseguests, score every twist, and crown a league champion at the finale.",
 };
 
 export default function RootLayout({
