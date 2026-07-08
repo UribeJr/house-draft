@@ -11,6 +11,6 @@ export const config = {
      * Everything except static assets. Auth pages are handled inside
      * updateSession (redirect signed-in users away from /login).
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|fonts/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|woff|woff2|ttf|otf|eot)$).*)",
   ],
 };
