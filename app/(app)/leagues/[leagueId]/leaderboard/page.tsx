@@ -64,7 +64,7 @@ export default async function LeaderboardPage({
             <p className="mt-3 text-sm text-zinc-600">
               They drafted the house, survived the block, and won eviction night. GG.
             </p>
-            <p className="mono-footer mt-6">Monopoly</p>
+            <p className="mono-footer mt-6">House Draft</p>
           </CardContent>
         </Card>
       )}

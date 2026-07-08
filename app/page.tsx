@@ -77,7 +77,7 @@ export default function LandingPage() {
               <div className="p-5">
                 <f.Icon className="h-8 w-8" />
                 <p className="mt-2 text-sm leading-relaxed text-zinc-700">{f.copy}</p>
-                <p className="mono-footer mt-4">Monopoly</p>
+                <p className="mono-footer mt-4">House Draft</p>
               </div>
             </div>
           );

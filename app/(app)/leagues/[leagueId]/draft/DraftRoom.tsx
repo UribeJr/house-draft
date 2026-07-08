@@ -225,7 +225,7 @@ export function DraftRoom({
               ))}
             </tbody>
           </table>
-          <p className="mono-footer mt-3">Monopoly</p>
+          <p className="mono-footer mt-3">House Draft</p>
           </CardContent>
         </Card>
 
@@ -300,7 +300,7 @@ export function DraftRoom({
                     </li>
                   ))}
                 </ul>
-                <p className="mono-footer border-t border-black/10 py-1">Monopoly</p>
+                <p className="mono-footer border-t border-black/10 py-1">House Draft</p>
               </div>
             );
           })}

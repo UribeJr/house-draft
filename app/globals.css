@@ -91,7 +91,34 @@
   --type-instruction-body-size: 1rem;
   --type-instruction-body-lh: 1.5;
   --type-instruction-body-ls: -0.01em;
+}
 
+@media (max-width: 640px) {
+  :root {
+    --type-board-large-size: 1.375rem;
+    --type-board-large-lh: 1.5rem;
+    --type-board-medium-size: 1.0625rem;
+    --type-board-medium-lh: 1.25rem;
+    --type-board-small-size: 0.875rem;
+    --type-board-small-lh: 1rem;
+
+    --type-card-large-size: 0.8125rem;
+    --type-card-large-lh: 0.9375rem;
+    --type-card-medium-size: 0.75rem;
+    --type-card-medium-lh: 0.875rem;
+    --type-card-small-size: 0.75rem;
+    --type-card-small-lh: 0.875rem;
+
+    --type-instruction-heading-large-size: clamp(2.25rem, 7vw, 3.25rem);
+    --type-instruction-heading-medium-size: 2.125rem;
+    --type-instruction-heading-medium-lh: 1.15;
+    --type-instruction-body-large-size: 1.625rem;
+    --type-instruction-body-size: 1.0625rem;
+    --type-instruction-body-lh: 1.55;
+  }
+}
+
+:root {
   /* shadcn/ui semantic tokens — mapped onto the Monopoly kit, not the default gray theme */
   --background: var(--kit-board);
   --foreground: var(--kit-foreground);

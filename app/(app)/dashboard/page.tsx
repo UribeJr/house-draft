@@ -75,7 +75,7 @@ export default async function DashboardPage() {
                 Join a league
               </Link>
             </div>
-            <p className="mono-footer mt-8 w-full">Monopoly</p>
+            <p className="mono-footer mt-8 w-full">House Draft</p>
           </CardContent>
         </Card>
       ) : (
@@ -94,7 +94,7 @@ export default async function DashboardPage() {
                 <div className={`card-band ${band}`}>{league.name}</div>
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="text-xs text-zinc-600">{league.season?.name}</p>
+                    <p className="text-sm sm:text-xs text-zinc-600">{league.season?.name}</p>
                     <Badge variant={status.variant} className={status.className}>{status.label}</Badge>
                   </div>
                   <div className="mt-4 flex items-center justify-between text-sm">
@@ -103,7 +103,7 @@ export default async function DashboardPage() {
                       <Badge className="bg-[#aae0fa] text-black">Commissioner</Badge>
                     )}
                   </div>
-                  <p className="mono-footer mt-4">Monopoly</p>
+                  <p className="mono-footer mt-4">House Draft</p>
                 </div>
               </Link>
             );

@@ -99,7 +99,7 @@ export default async function LeagueHomePage({
             <p className="mt-1 text-sm text-zinc-700">
               @{champion.username} · {champion.total_points} pts — see the full finale results →
             </p>
-            <p className="mono-footer mt-4">Monopoly</p>
+            <p className="mono-footer mt-4">House Draft</p>
           </div>
         </Link>
       )}
