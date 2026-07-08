@@ -23,6 +23,7 @@ export function LeagueTabs({
     { href: `${base}/roster`, label: "My Team" },
     { href: `${base}/trades`, label: "Trades" },
     { href: `${base}/predictions`, label: "Predictions" },
+    { href: `${base}/rules`, label: "Rules" },
     ...(isCommissioner ? [{ href: `${base}/commissioner`, label: "Commissioner", icon: true }] : []),
   ];
 

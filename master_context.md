@@ -2,7 +2,7 @@
 
 Read this before touching anything. It captures the architecture, live infrastructure,
 non-obvious decisions, and the traps already discovered so you don't rediscover them.
-Last updated: 2026-07-07 (initial build + real BB28 cast import).
+Last updated: 2026-07-08 (added game rules + scoring reference).
 
 ## What this is
 
@@ -15,6 +15,49 @@ is crowned. Full product spec + demo walkthrough: see `README.md`.
 **Stack:** Next.js 16 (App Router, Turbopack) · TypeScript · Tailwind CSS v4 ·
 Supabase (Auth via `@supabase/ssr` 0.12, Postgres 17, Storage) · deployable on Vercel.
 No email sending, no payments, no websockets (polling).
+
+## Game Rules & Scoring
+
+Core flow: users create or join a league by invite code while the draft is pending;
+the commissioner starts a snake draft; members draft houseguests into rosters; the
+commissioner records episode events; optional 1-for-1 trades can swap ownership;
+the leaderboard recomputes from scoring events until finale bonuses complete the league
+and rank 1 is the champion.
+
+Default scoring rules are seeded by `create_league` into `scoring_rules`:
+
+| Event | Points |
+| --- | ---: |
+| HOH Win (`HOH_WIN`) | +10 |
+| Veto Win (`VETO_WIN`) | +8 |
+| Veto Used (`VETO_USED`) | +4 |
+| Survived Eviction Night (`SURVIVED_EVICTION`) | +3 |
+| Nomination Chair (`NOMINATED`) | -3 |
+| Replacement Nominee (`REPLACEMENT_NOMINEE`) | -2 |
+| Evicted (`EVICTED`) | -10 |
+| Made Jury (`MADE_JURY`) | +10 |
+| Made Final 5 (`MADE_FINAL_5`) | +15 |
+| Made Final 3 (`MADE_FINAL_3`) | +20 |
+| Runner-Up (`RUNNER_UP`) | +30 |
+| Season Winner (`WINNER`) | +60 |
+| America's Favorite (`AMERICA_FAVORITE`) | +25 |
+| Called the Winner (`CORRECT_WINNER_PICK`) | +25 |
+| Called the First Boot (`CORRECT_FIRST_BOOT`) | +15 |
+
+Only commissioners add scoring events. `add_scoring_event` snapshots the current
+point value from `scoring_rules` into `scoring_events.points`, so later rule edits
+do not rewrite old events. Standings are computed from events, not stored totals;
+commissioner deletion of an event is the undo path and immediately changes the
+leaderboard. Back-entered events must pass the real `occurred_at` timestamp if they
+should credit the owner at that show moment instead of the entry time.
+
+Houseguest events credit whichever league member owned that houseguest at
+`occurred_at`, using roster ownership intervals. Prediction bonuses are team-level
+events: they set `league_member_id` instead of `houseguest_id` and are unique per
+member/event type. Finale flow is: mark real show facts on houseguests
+(`status`/`placement`), enter winner/finale events as needed, run
+`award_finale_bonuses` to idempotently award correct winner/first-boot picks, set the
+league to `completed`, and treat `league_leaderboard.rank = 1` as champion.
 
 ## Live infrastructure — IMPORTANT
 
