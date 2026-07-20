@@ -288,6 +288,10 @@ const EVENT_ICONS: Record<EventType, (props: IconProps) => React.JSX.Element> = 
   RUNNER_UP: TrophyIcon,
   WINNER: TrophyIcon,
   AMERICA_FAVORITE: HeartIcon,
+  BLOCK_BUSTER_WIN: ShieldIcon,
+  TIME_CAPSULE_SELECTED: CrystalBallIcon,
+  TIME_CAPSULE_POWER: KeyIcon,
+  TIME_CAPSULE_PUNISHMENT: XTokenIcon,
   CORRECT_WINNER_PICK: CrystalBallIcon,
   CORRECT_FIRST_BOOT: TargetIcon,
 };

@@ -848,6 +848,10 @@ export type Database = {
         | "RUNNER_UP"
         | "WINNER"
         | "AMERICA_FAVORITE"
+        | "BLOCK_BUSTER_WIN"
+        | "TIME_CAPSULE_SELECTED"
+        | "TIME_CAPSULE_POWER"
+        | "TIME_CAPSULE_PUNISHMENT"
         | "CORRECT_WINNER_PICK"
         | "CORRECT_FIRST_BOOT"
       houseguest_status: "active" | "evicted" | "jury" | "finalist" | "winner"
@@ -996,6 +1000,10 @@ export const Constants = {
         "RUNNER_UP",
         "WINNER",
         "AMERICA_FAVORITE",
+        "BLOCK_BUSTER_WIN",
+        "TIME_CAPSULE_SELECTED",
+        "TIME_CAPSULE_POWER",
+        "TIME_CAPSULE_PUNISHMENT",
         "CORRECT_WINNER_PICK",
         "CORRECT_FIRST_BOOT",
       ],

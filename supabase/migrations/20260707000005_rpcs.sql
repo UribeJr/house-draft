@@ -51,7 +51,9 @@ begin
     ('HOH_WIN', 10), ('VETO_WIN', 8), ('VETO_USED', 4), ('SURVIVED_EVICTION', 3),
     ('NOMINATED', -3), ('REPLACEMENT_NOMINEE', -2), ('EVICTED', -10), ('MADE_JURY', 10),
     ('MADE_FINAL_5', 15), ('MADE_FINAL_3', 20), ('RUNNER_UP', 30), ('WINNER', 60),
-    ('AMERICA_FAVORITE', 25), ('CORRECT_WINNER_PICK', 25), ('CORRECT_FIRST_BOOT', 15)
+    ('AMERICA_FAVORITE', 25), ('BLOCK_BUSTER_WIN', 8), ('TIME_CAPSULE_SELECTED', 5),
+    ('TIME_CAPSULE_POWER', 3), ('TIME_CAPSULE_PUNISHMENT', -3),
+    ('CORRECT_WINNER_PICK', 25), ('CORRECT_FIRST_BOOT', 15)
   ) as v(et, pts);
 
   return query select v_league_id, v_code;

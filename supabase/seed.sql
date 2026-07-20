@@ -13,7 +13,7 @@ insert into public.houseguests (season_id, name, age, hometown, occupation, imag
 select s.id, v.name, v.age, v.hometown, v.occupation, v.image_url
 from public.seasons s,
 (values
-  ('Ashley Trail', 24, 'Alton, IL', 'Bartender', 'https://static.wikia.nocookie.net/bigbrother/images/7/72/US28_Ashley_Large.jpg'),
+  ('Dee Valladares', 29, 'Miami, FL', 'Entrepreneur (Survivor winner)', null),
   ('Barrett Pfeiffer', 27, 'Benton, AR', 'Jumbotron Engineer', 'https://static.wikia.nocookie.net/bigbrother/images/f/f2/US28_Barrett_Large.jpg'),
   ('Chuk Anyanwu', 27, 'Dallas, TX', 'Supply Chain Analyst', 'https://static.wikia.nocookie.net/bigbrother/images/8/8c/US28_Chuk_Large.jpg'),
   ('Drew Campbell', 22, 'Temecula, CA', 'Surgical Dental Assistant', 'https://static.wikia.nocookie.net/bigbrother/images/2/2b/US28_Drew_Large.jpg'),

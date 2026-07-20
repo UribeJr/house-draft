@@ -150,8 +150,18 @@ async function main() {
   ok("commissioner creates league", `code ${CODE}`);
 
   const rules = await rest(1, "GET", `scoring_rules?league_id=eq.${L}&select=event_type,points`);
-  if (rules.length !== 15) fail("15 default scoring rules seeded", `found ${rules.length}`);
-  else ok("15 default scoring rules seeded");
+  if (rules.length !== 19) fail("19 default scoring rules seeded", `found ${rules.length}`);
+  else ok("19 default scoring rules seeded");
+  const rulePoints = Object.fromEntries(rules.map((rule) => [rule.event_type, rule.points]));
+  const bb28Rules = {
+    BLOCK_BUSTER_WIN: 8,
+    TIME_CAPSULE_SELECTED: 5,
+    TIME_CAPSULE_POWER: 3,
+    TIME_CAPSULE_PUNISHMENT: -3,
+  };
+  const badBb28Rules = Object.entries(bb28Rules).filter(([eventType, points]) => rulePoints[eventType] !== points);
+  if (badBb28Rules.length === 0) ok("BB28 twist scoring rules seeded with expected points");
+  else fail("BB28 twist scoring rules seeded with expected points", JSON.stringify(rulePoints));
 
   for (const n of [2, 3, 4]) await rpc(n, "join_league_with_code", { p_invite_code: CODE, p_team_name: `E2E Team ${n}` });
   ok("3 members join by invite code");
@@ -225,6 +235,7 @@ async function main() {
   console.log("\nScoring & leaderboard");
   await rpc(1, "add_scoring_event", { p_league_id: L, p_event_type: "HOH_WIN", p_week: 1, p_houseguest_id: cast[0].id, p_episode: 1 });
   await rpc(1, "add_scoring_event", { p_league_id: L, p_event_type: "VETO_WIN", p_week: 1, p_houseguest_id: cast[4].id, p_episode: 2 });
+  await rpc(1, "add_scoring_event", { p_league_id: L, p_event_type: "BLOCK_BUSTER_WIN", p_week: 1, p_houseguest_id: cast[8].id, p_episode: 3 });
   await rpc(1, "add_scoring_event", { p_league_id: L, p_event_type: "NOMINATED", p_week: 1, p_houseguest_id: cast[1].id });
   const evictedEventId = await rpc(1, "add_scoring_event", { p_league_id: L, p_event_type: "EVICTED", p_week: 1, p_houseguest_id: cast[1].id, p_notes: "Blindside!" });
   await expectThrow("non-commissioner cannot score events", () =>
@@ -233,9 +244,10 @@ async function main() {
 
   let board = await rest(2, "GET", `league_leaderboard?league_id=eq.${L}&select=team_name,total_points,rank&order=rank`);
   let pts = Object.fromEntries(board.map((b) => [b.team_name, b.total_points]));
-  // pick1(cast[0])->team1 HOH+10; pick5(round2 pos4, cast[4])->team4 VETO+8; pick2(cast[1])->team2 NOM-3 EVICT-10
-  if (pts["E2E Team 1"] === 10 && pts["E2E Team 4"] === 8 && pts["E2E Team 2"] === -13) {
-    ok("leaderboard totals match hand-computed points", "10 / 8 / -13 / 0");
+  // pick1(cast[0])->team1 HOH+10; pick9(cast[8])->team1 Block Buster+8;
+  // pick5(round2 pos4, cast[4])->team4 VETO+8; pick2(cast[1])->team2 NOM-3 EVICT-10
+  if (pts["E2E Team 1"] === 18 && pts["E2E Team 4"] === 8 && pts["E2E Team 2"] === -13) {
+    ok("leaderboard totals match hand-computed points", "18 / 8 / -13 / 0");
   } else {
     fail("leaderboard totals match hand-computed points", JSON.stringify(pts));
   }

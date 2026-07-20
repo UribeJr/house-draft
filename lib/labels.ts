@@ -22,6 +22,10 @@ export const EVENT_LABELS: Record<EventType, string> = {
   RUNNER_UP: "Runner-Up",
   WINNER: "Season Winner",
   AMERICA_FAVORITE: "America's Favorite",
+  BLOCK_BUSTER_WIN: "Block Buster Win",
+  TIME_CAPSULE_SELECTED: "Time Capsule Selected",
+  TIME_CAPSULE_POWER: "Time Capsule Power-Up",
+  TIME_CAPSULE_PUNISHMENT: "Time Capsule Punishment",
   CORRECT_WINNER_PICK: "Called the Winner",
   CORRECT_FIRST_BOOT: "Called the First Boot",
 };

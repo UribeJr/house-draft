@@ -46,8 +46,8 @@ const LEAGUE_NAME = "The Backyard Alliance";
 // Big Brother Network's cast gallery.
 const WIKI_IMG = "https://static.wikia.nocookie.net/bigbrother/images";
 const BBN_IMG = "https://bigbrothernetwork.com/wp-content/uploads";
-const CAST: Array<[string, number, string, string, string]> = [
-  ["Ashley Trail", 24, "Alton, IL", "Bartender", `${WIKI_IMG}/7/72/US28_Ashley_Large.jpg`],
+const CAST: Array<[string, number, string, string, string | null]> = [
+  ["Dee Valladares", 29, "Miami, FL", "Entrepreneur (Survivor winner)", null],
   ["Barrett Pfeiffer", 27, "Benton, AR", "Jumbotron Engineer", `${WIKI_IMG}/f/f2/US28_Barrett_Large.jpg`],
   ["Chuk Anyanwu", 27, "Dallas, TX", "Supply Chain Analyst", `${WIKI_IMG}/8/8c/US28_Chuk_Large.jpg`],
   ["Drew Campbell", 22, "Temecula, CA", "Surgical Dental Assistant", `${WIKI_IMG}/2/2b/US28_Drew_Large.jpg`],

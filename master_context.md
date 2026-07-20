@@ -2,7 +2,7 @@
 
 Read this before touching anything. It captures the architecture, live infrastructure,
 non-obvious decisions, and the traps already discovered so you don't rediscover them.
-Last updated: 2026-07-08 (added game rules + scoring reference).
+Last updated: 2026-07-20 (added BB28 twist scoring events).
 
 ## What this is
 
@@ -41,6 +41,10 @@ Default scoring rules are seeded by `create_league` into `scoring_rules`:
 | Runner-Up (`RUNNER_UP`) | +30 |
 | Season Winner (`WINNER`) | +60 |
 | America's Favorite (`AMERICA_FAVORITE`) | +25 |
+| Block Buster Win (`BLOCK_BUSTER_WIN`) | +8 |
+| Time Capsule Selected (`TIME_CAPSULE_SELECTED`) | +5 |
+| Time Capsule Power-Up (`TIME_CAPSULE_POWER`) | +3 |
+| Time Capsule Punishment (`TIME_CAPSULE_PUNISHMENT`) | -3 |
 | Called the Winner (`CORRECT_WINNER_PICK`) | +25 |
 | Called the First Boot (`CORRECT_FIRST_BOOT`) | +15 |
 
