@@ -7,7 +7,7 @@ create type public.draft_status      as enum ('pending','active','completed');
 create type public.trade_status      as enum ('pending','accepted','rejected','vetoed','approved');
 create type public.acquisition_type  as enum ('draft','trade');
 create type public.event_type as enum (
-  'HOH_WIN','VETO_WIN','VETO_USED','SURVIVED_EVICTION','NOMINATED',
+  'HOH_WIN','VETO_WIN','VETO_USED','SAVED_WITH_VETO','SURVIVED_EVICTION','NOMINATED',
   'REPLACEMENT_NOMINEE','EVICTED','MADE_JURY','MADE_FINAL_5','MADE_FINAL_3',
   'RUNNER_UP','WINNER','AMERICA_FAVORITE','BLOCK_BUSTER_WIN','TIME_CAPSULE_SELECTED',
   'TIME_CAPSULE_POWER','TIME_CAPSULE_PUNISHMENT','CORRECT_WINNER_PICK','CORRECT_FIRST_BOOT'

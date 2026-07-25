@@ -2,7 +2,7 @@
 
 Read this before touching anything. It captures the architecture, live infrastructure,
 non-obvious decisions, and the traps already discovered so you don't rediscover them.
-Last updated: 2026-07-25 (EVICTED default points -10 → -3, forward-only).
+Last updated: 2026-07-25 (added SAVED_WITH_VETO scoring event).
 
 ## What this is
 
@@ -31,6 +31,7 @@ Default scoring rules are seeded by `create_league` into `scoring_rules`:
 | HOH Win (`HOH_WIN`) | +10 |
 | Veto Win (`VETO_WIN`) | +8 |
 | Veto Used (`VETO_USED`) | +4 |
+| Saved with Veto (`SAVED_WITH_VETO`) | +4 |
 | Survived Eviction Night (`SURVIVED_EVICTION`) | +3 |
 | Nomination Chair (`NOMINATED`) | -3 |
 | Replacement Nominee (`REPLACEMENT_NOMINEE`) | -2 |

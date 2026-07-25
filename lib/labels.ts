@@ -12,6 +12,7 @@ export const EVENT_LABELS: Record<EventType, string> = {
   HOH_WIN: "HOH Win",
   VETO_WIN: "Veto Win",
   VETO_USED: "Veto Used",
+  SAVED_WITH_VETO: "Saved with Veto",
   SURVIVED_EVICTION: "Survived Eviction Night",
   NOMINATED: "Nomination Chair",
   REPLACEMENT_NOMINEE: "Replacement Nominee",

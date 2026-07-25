@@ -1,6 +1,6 @@
--- HouseDraft: BB28 twist scoring rules.
+-- HouseDraft: Saved with Veto scoring rule (+4).
 --
--- Existing leagues get only missing rows; custom point edits on existing rules
+-- Existing leagues get only the missing row; custom point edits on existing rules
 -- are preserved by the unique (league_id, event_type) conflict target.
 
 create or replace function public.create_league(
@@ -59,12 +59,6 @@ begin
 end $$;
 
 insert into public.scoring_rules (league_id, event_type, points)
-select l.id, v.et::public.event_type, v.pts
+select l.id, 'SAVED_WITH_VETO'::public.event_type, 4
 from public.leagues l
-cross join (values
-  ('BLOCK_BUSTER_WIN', 8),
-  ('TIME_CAPSULE_SELECTED', 5),
-  ('TIME_CAPSULE_POWER', 3),
-  ('TIME_CAPSULE_PUNISHMENT', -3)
-) as v(et, pts)
 on conflict (league_id, event_type) do nothing;

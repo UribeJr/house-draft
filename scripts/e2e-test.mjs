@@ -150,14 +150,15 @@ async function main() {
   ok("commissioner creates league", `code ${CODE}`);
 
   const rules = await rest(1, "GET", `scoring_rules?league_id=eq.${L}&select=event_type,points`);
-  if (rules.length !== 19) fail("19 default scoring rules seeded", `found ${rules.length}`);
-  else ok("19 default scoring rules seeded");
+  if (rules.length !== 20) fail("20 default scoring rules seeded", `found ${rules.length}`);
+  else ok("20 default scoring rules seeded");
   const rulePoints = Object.fromEntries(rules.map((rule) => [rule.event_type, rule.points]));
   const bb28Rules = {
     BLOCK_BUSTER_WIN: 8,
     TIME_CAPSULE_SELECTED: 5,
     TIME_CAPSULE_POWER: 3,
     TIME_CAPSULE_PUNISHMENT: -3,
+    SAVED_WITH_VETO: 4,
   };
   const badBb28Rules = Object.entries(bb28Rules).filter(([eventType, points]) => rulePoints[eventType] !== points);
   if (badBb28Rules.length === 0) ok("BB28 twist scoring rules seeded with expected points");
