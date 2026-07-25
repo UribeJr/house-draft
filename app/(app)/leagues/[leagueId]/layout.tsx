@@ -29,10 +29,21 @@ export default async function LeagueLayout({
 
   return (
     <div>
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <div>
-          <h1 className="type-instruction-heading-medium">{league.name}</h1>
-          <p className="mt-1 text-sm text-zinc-600">{league.season?.name}</p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/mascot/egg-angela.png"
+            alt=""
+            width={94}
+            height={140}
+            className="h-14 w-auto shrink-0 select-none"
+            draggable={false}
+          />
+          <div className="min-w-0">
+            <h1 className="type-instruction-heading-medium">{league.name}</h1>
+            <p className="mt-1 text-sm text-zinc-600">{league.season?.name}</p>
+          </div>
         </div>
         {league.status === "completed" && (
           <Badge className="bg-[#fef200] text-black">
