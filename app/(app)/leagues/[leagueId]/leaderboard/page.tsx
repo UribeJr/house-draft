@@ -69,66 +69,83 @@ export default async function LeaderboardPage({
         </Card>
       )}
 
-      <Card>
+      <Card className="min-w-0">
         <CardHeader band="green">Standings</CardHeader>
-        <CardContent className="overflow-x-auto">
-        {leaderboard.length === 0 ? (
-          <p className="text-sm text-zinc-500">No teams yet.</p>
-        ) : (
-          <table className="w-full min-w-[520px] text-sm">
-            <thead>
-              <tr className="type-card-large text-left text-zinc-500">
-                <th className="pb-2 pr-2">#</th>
-                <th className="pb-2 pr-2">Team</th>
-                {weeks.map((w) => (
-                  <th key={w} className="pb-2 pr-2 text-right font-mono">
-                    W{w}
-                  </th>
-                ))}
-                <th className="pb-2 text-right">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {leaderboard.map((row) => (
-                <tr
-                  key={row.league_member_id}
-                  className={`border-t border-black/10 ${
-                    row.league_member_id === myMember?.id ? "bg-[#fef200]/30" : ""
-                  }`}
-                >
-                  <td className="type-card-large-bold py-2.5 pr-2 text-zinc-500">
-                    {row.rank === 1 ? <CrownIcon className="h-4 w-4" /> : row.rank}
-                  </td>
-                  <td className="py-2.5 pr-2">
-                    <span className="font-semibold">{row.team_name}</span>
-                    <span className="ml-2 hidden text-xs text-zinc-500 sm:inline">
-                      @{row.username}
-                    </span>
-                  </td>
-                  {weeks.map((w) => {
-                    const pts = row.league_member_id
-                      ? weeklyByMember.get(row.league_member_id)?.get(w!) ?? 0
-                      : 0;
-                    const highlight = w === currentWeek && pts !== 0;
-                    return (
-                      <td
+        <CardContent className="min-w-0 p-0">
+          {leaderboard.length === 0 ? (
+            <p className="px-5 py-5 text-sm text-zinc-500">No teams yet.</p>
+          ) : (
+            <div className="overflow-x-auto overscroll-x-contain px-5 py-5">
+              <table className="w-max min-w-full text-sm">
+                <thead>
+                  <tr className="type-card-large text-left text-zinc-500">
+                    <th className="sticky left-0 z-20 w-8 min-w-8 bg-white pb-2 pr-2">#</th>
+                    <th className="sticky left-8 z-20 bg-white pb-2 pr-3 shadow-[2px_0_0_0_rgba(0,0,0,0.06)]">
+                      Team
+                    </th>
+                    {weeks.map((w) => (
+                      <th
                         key={w}
-                        className={`py-2.5 pr-2 text-right font-mono ${
-                          highlight ? "font-bold text-[#f7941d]" : "text-zinc-600"
-                        }`}
+                        className="whitespace-nowrap px-1.5 pb-2 text-right font-mono tabular-nums"
                       >
-                        {pts !== 0 ? pts : "·"}
-                      </td>
+                        W{w}
+                      </th>
+                    ))}
+                    <th className="sticky right-0 z-20 bg-white pb-2 pl-3 text-right shadow-[-2px_0_0_0_rgba(0,0,0,0.06)]">
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leaderboard.map((row) => {
+                    const isMe = row.league_member_id === myMember?.id;
+                    const stickyBg = isMe ? "bg-[#fff9b8]" : "bg-white";
+                    return (
+                      <tr
+                        key={row.league_member_id}
+                        className={`border-t border-black/10 ${isMe ? "bg-[#fef200]/30" : ""}`}
+                      >
+                        <td
+                          className={`sticky left-0 z-10 w-8 min-w-8 type-card-large-bold py-2.5 pr-2 text-zinc-500 ${stickyBg}`}
+                        >
+                          {row.rank === 1 ? <CrownIcon className="h-4 w-4" /> : row.rank}
+                        </td>
+                        <td
+                          className={`sticky left-8 z-10 whitespace-nowrap py-2.5 pr-3 shadow-[2px_0_0_0_rgba(0,0,0,0.06)] ${stickyBg}`}
+                        >
+                          <span className="font-semibold">{row.team_name}</span>
+                          <span className="ml-2 hidden text-xs text-zinc-500 sm:inline">
+                            @{row.username}
+                          </span>
+                        </td>
+                        {weeks.map((w) => {
+                          const pts = row.league_member_id
+                            ? weeklyByMember.get(row.league_member_id)?.get(w!) ?? 0
+                            : 0;
+                          const highlight = w === currentWeek && pts !== 0;
+                          return (
+                            <td
+                              key={w}
+                              className={`whitespace-nowrap px-1.5 py-2.5 text-right font-mono tabular-nums ${
+                                highlight ? "font-bold text-[#f7941d]" : "text-zinc-600"
+                              }`}
+                            >
+                              {pts !== 0 ? pts : "·"}
+                            </td>
+                          );
+                        })}
+                        <td
+                          className={`sticky right-0 z-10 type-instruction-body-large py-2.5 pl-3 text-right text-[#f7941d] shadow-[-2px_0_0_0_rgba(0,0,0,0.06)] ${stickyBg}`}
+                        >
+                          {row.total_points}
+                        </td>
+                      </tr>
                     );
                   })}
-                  <td className="type-instruction-body-large py-2.5 text-right text-[#f7941d]">
-                    {row.total_points}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+                </tbody>
+              </table>
+            </div>
+          )}
         </CardContent>
       </Card>
 
