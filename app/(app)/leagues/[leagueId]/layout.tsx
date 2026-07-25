@@ -30,14 +30,14 @@ export default async function LeagueLayout({
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="flex min-w-0 items-center gap-3">
+        <div className="flex min-w-0 items-center gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/mascot/egg-angela.png"
-            alt=""
-            width={94}
-            height={140}
-            className="h-14 w-auto shrink-0 select-none"
+            alt="House Draft mascot"
+            width={85}
+            height={128}
+            className="h-24 w-auto shrink-0 select-none sm:h-32"
             draggable={false}
           />
           <div className="min-w-0">
