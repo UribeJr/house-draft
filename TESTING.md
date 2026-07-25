@@ -167,7 +167,7 @@ correctly (see §4.6).
   ```
   the points field auto-fills to **+10** the moment you pick the event type.
   ```
-- [ ] Score a **NOMINATED** (auto −3) and an **EVICTED** (auto −10) for a
+- [ ] Score a **NOMINATED** (auto −3) and an **EVICTED** (auto −3) for a
   ```
   different houseguest.
   ```

@@ -2,7 +2,7 @@
 
 Read this before touching anything. It captures the architecture, live infrastructure,
 non-obvious decisions, and the traps already discovered so you don't rediscover them.
-Last updated: 2026-07-20 (added BB28 twist scoring events).
+Last updated: 2026-07-25 (EVICTED default points -10 → -3, forward-only).
 
 ## What this is
 
@@ -34,7 +34,7 @@ Default scoring rules are seeded by `create_league` into `scoring_rules`:
 | Survived Eviction Night (`SURVIVED_EVICTION`) | +3 |
 | Nomination Chair (`NOMINATED`) | -3 |
 | Replacement Nominee (`REPLACEMENT_NOMINEE`) | -2 |
-| Evicted (`EVICTED`) | -10 |
+| Evicted (`EVICTED`) | -3 |
 | Made Jury (`MADE_JURY`) | +10 |
 | Made Final 5 (`MADE_FINAL_5`) | +15 |
 | Made Final 3 (`MADE_FINAL_3`) | +20 |

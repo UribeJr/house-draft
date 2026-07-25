@@ -1,7 +1,9 @@
--- HouseDraft: BB28 twist scoring rules.
---
--- Existing leagues get only missing rows; custom point edits on existing rules
--- are preserved by the unique (league_id, event_type) conflict target.
+-- HouseDraft: EVICTED default points -10 → -3 (forward-only).
+-- Past scoring_events keep their snapshotted points; only the rule + seed change.
+
+update public.scoring_rules
+set points = -3
+where event_type = 'EVICTED' and points = -10;
 
 create or replace function public.create_league(
   p_name text,
@@ -57,14 +59,3 @@ begin
 
   return query select v_league_id, v_code;
 end $$;
-
-insert into public.scoring_rules (league_id, event_type, points)
-select l.id, v.et::public.event_type, v.pts
-from public.leagues l
-cross join (values
-  ('BLOCK_BUSTER_WIN', 8),
-  ('TIME_CAPSULE_SELECTED', 5),
-  ('TIME_CAPSULE_POWER', 3),
-  ('TIME_CAPSULE_PUNISHMENT', -3)
-) as v(et, pts)
-on conflict (league_id, event_type) do nothing;

@@ -245,9 +245,9 @@ async function main() {
   let board = await rest(2, "GET", `league_leaderboard?league_id=eq.${L}&select=team_name,total_points,rank&order=rank`);
   let pts = Object.fromEntries(board.map((b) => [b.team_name, b.total_points]));
   // pick1(cast[0])->team1 HOH+10; pick9(cast[8])->team1 Block Buster+8;
-  // pick5(round2 pos4, cast[4])->team4 VETO+8; pick2(cast[1])->team2 NOM-3 EVICT-10
-  if (pts["E2E Team 1"] === 18 && pts["E2E Team 4"] === 8 && pts["E2E Team 2"] === -13) {
-    ok("leaderboard totals match hand-computed points", "18 / 8 / -13 / 0");
+  // pick5(round2 pos4, cast[4])->team4 VETO+8; pick2(cast[1])->team2 NOM-3 EVICT-3
+  if (pts["E2E Team 1"] === 18 && pts["E2E Team 4"] === 8 && pts["E2E Team 2"] === -6) {
+    ok("leaderboard totals match hand-computed points", "18 / 8 / -6 / 0");
   } else {
     fail("leaderboard totals match hand-computed points", JSON.stringify(pts));
   }
