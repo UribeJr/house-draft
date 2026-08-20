@@ -839,6 +839,7 @@ export type Database = {
         | "VETO_WIN"
         | "VETO_USED"
         | "SAVED_WITH_VETO"
+        | "DIAMOND_VETO_USED"
         | "SURVIVED_EVICTION"
         | "NOMINATED"
         | "REPLACEMENT_NOMINEE"
@@ -992,6 +993,7 @@ export const Constants = {
         "VETO_WIN",
         "VETO_USED",
         "SAVED_WITH_VETO",
+        "DIAMOND_VETO_USED",
         "SURVIVED_EVICTION",
         "NOMINATED",
         "REPLACEMENT_NOMINEE",

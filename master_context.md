@@ -2,7 +2,7 @@
 
 Read this before touching anything. It captures the architecture, live infrastructure,
 non-obvious decisions, and the traps already discovered so you don't rediscover them.
-Last updated: 2026-08-19 (leftover houseguest pool trades).
+Last updated: 2026-08-19 (Diamond Veto Used scoring event).
 
 ## What this is
 
@@ -32,6 +32,7 @@ Default scoring rules are seeded by `create_league` into `scoring_rules`:
 | Veto Win (`VETO_WIN`) | +8 |
 | Veto Used (`VETO_USED`) | +4 |
 | Saved with Veto (`SAVED_WITH_VETO`) | +4 |
+| Diamond Veto Used (`DIAMOND_VETO_USED`) | +6 |
 | Survived Eviction Night (`SURVIVED_EVICTION`) | +3 |
 | Nomination Chair (`NOMINATED`) | -3 |
 | Replacement Nominee (`REPLACEMENT_NOMINEE`) | -2 |
