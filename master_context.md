@@ -2,7 +2,7 @@
 
 Read this before touching anything. It captures the architecture, live infrastructure,
 non-obvious decisions, and the traps already discovered so you don't rediscover them.
-Last updated: 2026-07-25 (added SAVED_WITH_VETO scoring event).
+Last updated: 2026-08-19 (leftover houseguest pool trades).
 
 ## What this is
 
@@ -128,9 +128,13 @@ league to `completed`, and treat `league_leaderboard.rank = 1` as champion.
    their `created_by` owner. Houseguest **status/placement** is editable by any
    commissioner of a league using that season (RPC `update_houseguest_status`) — they're
    facts of the show. First boot = houseguest whose `placement` = cast count.
-8. **Trade lifecycle:** `pending → rejected` | `pending → accepted` (executes
-   immediately when `trade_approval_required=false`) | `accepted → approved` (executes)
-   | `accepted → vetoed`. Ownership is re-validated at execution; stale trades die.
+8. **Trade lifecycle:** member swaps: `pending → rejected` | `pending → accepted`
+   (executes immediately when `trade_approval_required=false`) | `accepted → approved`
+   (executes) | `accepted → vetoed`. **Unclaimed pool claims** (leftover houseguests with
+   no roster row): proposer sends one of theirs, gets an unowned guest; trade inserts as
+   `accepted` and **always** awaits commissioner gavel (`recipient_member_id` and pool-side
+   `trade_items.from_member_id` are NULL). On execute, the sent guest returns to the pool.
+   Ownership is re-validated at execution; stale trades die.
 9. **Joining is blocked once the draft starts** (mid-draft joins break snake math).
 10. **Draft-room liveness = polling**: `components/Poller.tsx` calls `router.refresh()`
     every 2.5s while the draft is active. Upgrade path is Supabase Realtime on
@@ -228,7 +232,8 @@ are arbitrary hosts).
 ## Known limitations / candidate next steps
 
 - Polling, not Realtime (draft room + trades).
-- 1-for-1 trades only; no multi-asset packages, no counter-offers.
+- 1-for-1 trades only; no multi-asset packages, no counter-offers. Unclaimed leftover
+  houseguests can be claimed 1-for-1 via the floating pool (commissioner gavel required).
 - Attribution uses `occurred_at` (defaults to entry time) — back-entered events after a
   trade credit the current owner unless backdated.
 - Single commissioner; no transfer/co-commissioner.

@@ -564,19 +564,19 @@ export type Database = {
       }
       trade_items: {
         Row: {
-          from_member_id: string
+          from_member_id: string | null
           houseguest_id: string
           id: string
           trade_id: string
         }
         Insert: {
-          from_member_id: string
+          from_member_id?: string | null
           houseguest_id: string
           id?: string
           trade_id: string
         }
         Update: {
-          from_member_id?: string
+          from_member_id?: string | null
           houseguest_id?: string
           id?: string
           trade_id?: string
@@ -618,7 +618,7 @@ export type Database = {
           id: string
           league_id: string
           proposer_member_id: string
-          recipient_member_id: string
+          recipient_member_id: string | null
           resolved_at: string | null
           status: Database["public"]["Enums"]["trade_status"]
         }
@@ -627,7 +627,7 @@ export type Database = {
           id?: string
           league_id: string
           proposer_member_id: string
-          recipient_member_id: string
+          recipient_member_id?: string | null
           resolved_at?: string | null
           status?: Database["public"]["Enums"]["trade_status"]
         }
@@ -636,7 +636,7 @@ export type Database = {
           id?: string
           league_id?: string
           proposer_member_id?: string
-          recipient_member_id?: string
+          recipient_member_id?: string | null
           resolved_at?: string | null
           status?: Database["public"]["Enums"]["trade_status"]
         }

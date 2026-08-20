@@ -23,17 +23,23 @@ type RosterRow = {
   member: { team_name: string } | null;
   houseguest: { id: string; name: string; image_url: string | null; status: HouseguestStatus } | null;
 };
+type LeftoverHouseguest = {
+  id: string;
+  name: string;
+  image_url: string | null;
+  status: HouseguestStatus;
+};
 type Trade = {
   id: string;
   status: TradeStatus;
   created_at: string;
   resolved_at: string | null;
   proposer_member_id: string;
-  recipient_member_id: string;
+  recipient_member_id: string | null;
   proposer: { team_name: string; user_id: string } | null;
   recipient: { team_name: string; user_id: string } | null;
   items: {
-    from_member_id: string;
+    from_member_id: string | null;
     houseguest: { name: string; image_url: string | null } | null;
   }[];
 };
@@ -50,12 +56,14 @@ export function TradesBoard({
   myMemberId,
   currentUserId,
   rosterRows,
+  leftoverHouseguests,
   trades,
 }: {
   league: League;
   myMemberId: string | null;
   currentUserId: string;
   rosterRows: RosterRow[];
+  leftoverHouseguests: LeftoverHouseguest[];
   trades: Trade[];
 }) {
   const [proposeState, proposeAction] = useActionState(proposeTrade, null);
@@ -68,6 +76,22 @@ export function TradesBoard({
   const myHouseguests = rosterRows.filter((r) => r.league_member_id === myMemberId);
   const theirHouseguests = rosterRows.filter((r) => r.league_member_id !== myMemberId);
   const isCommissioner = league.commissioner_id === currentUserId;
+  const receiveOptions = [
+    ...theirHouseguests.map((r) => ({
+      id: r.houseguest!.id,
+      name: r.houseguest!.name,
+      imageUrl: r.houseguest!.image_url,
+      status: r.houseguest!.status,
+      secondary: r.member?.team_name ?? null,
+    })),
+    ...leftoverHouseguests.map((hg) => ({
+      id: hg.id,
+      name: hg.name,
+      imageUrl: hg.image_url,
+      status: hg.status,
+      secondary: "Unclaimed",
+    })),
+  ];
 
   if (!league.trades_enabled) {
     return (
@@ -112,18 +136,20 @@ export function TradesBoard({
               <EntityCombobox
                 name="their_houseguest_id"
                 required
-                items={theirHouseguests.map((r) => ({
-                  id: r.houseguest!.id,
-                  name: r.houseguest!.name,
-                  imageUrl: r.houseguest!.image_url,
-                  status: r.houseguest!.status,
-                  secondary: r.member?.team_name ?? null,
-                }))}
-                placeholder="Pick from another team…"
-                searchPlaceholder="Search other rosters…"
+                items={receiveOptions}
+                placeholder="Pick from another team or unclaimed…"
+                searchPlaceholder="Search rosters and unclaimed…"
               />
             </div>
           </div>
+          {leftoverHouseguests.length > 0 && (
+            <p className="flex items-center gap-1.5 text-xs text-zinc-500">
+              <GavelIcon className="h-3.5 w-3.5" />{" "}
+              {leftoverHouseguests.length} unclaimed houseguest
+              {leftoverHouseguests.length === 1 ? "" : "s"} floating in the house — claims
+              always need the commissioner&apos;s gavel.
+            </p>
+          )}
           {league.trade_approval_required && (
             <p className="flex items-center gap-1.5 text-xs text-zinc-500">
               <GavelIcon className="h-3.5 w-3.5" /> This league requires commissioner approval — accepted trades wait for the gavel.
@@ -158,12 +184,17 @@ export function TradesBoard({
         ) : (
           <ul className="mt-4 space-y-3">
             {trades.map((t) => {
+              const isPoolTrade = t.recipient_member_id === null;
               const give = t.items.find((i) => i.from_member_id === t.proposer_member_id);
-              const get = t.items.find((i) => i.from_member_id === t.recipient_member_id);
+              const get = isPoolTrade
+                ? t.items.find((i) => i.from_member_id === null)
+                : t.items.find((i) => i.from_member_id === t.recipient_member_id);
               const iAmRecipient = t.recipient?.user_id === currentUserId;
               const canRespond = t.status === "pending" && iAmRecipient;
               const canApprove =
-                t.status === "accepted" && isCommissioner && league.trade_approval_required;
+                t.status === "accepted" &&
+                isCommissioner &&
+                (league.trade_approval_required || isPoolTrade);
 
               return (
                 <li key={t.id} className="rounded-xl border border-black/15 surface-row p-4">
@@ -180,8 +211,14 @@ export function TradesBoard({
                         <HgAvatar name={get.houseguest.name} imageUrl={get.houseguest.image_url} size="xs" />
                       )}
                       <span className="font-semibold text-[#9747ff]">{get?.houseguest?.name}</span>
-                      <span className="text-zinc-500"> from </span>
-                      <span className="font-semibold">{t.recipient?.team_name}</span>
+                      {isPoolTrade ? (
+                        <span className="text-zinc-500"> from the house</span>
+                      ) : (
+                        <>
+                          <span className="text-zinc-500"> from </span>
+                          <span className="font-semibold">{t.recipient?.team_name}</span>
+                        </>
+                      )}
                     </p>
                     <Badge variant={TRADE_STATUS_STYLES[t.status]}>
                       {TRADE_STATUS_LABELS[t.status]}

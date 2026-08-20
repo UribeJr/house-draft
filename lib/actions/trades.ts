@@ -14,15 +14,28 @@ export async function proposeTrade(_prev: ActionState, formData: FormData): Prom
     return { error: "Pick a houseguest from each side of the trade." };
 
   const supabase = await createClient();
-  const { error } = await supabase.rpc("propose_trade", {
+  const { data: tradeId, error } = await supabase.rpc("propose_trade", {
     p_league_id: leagueId,
     p_my_houseguest_id: myHouseguestId,
     p_their_houseguest_id: theirHouseguestId,
   });
 
   if (error) return { error: friendlyError(error.message) };
+
+  let message = "Trade proposed. Time to campaign.";
+  if (tradeId) {
+    const { data: trade } = await supabase
+      .from("trades")
+      .select("recipient_member_id")
+      .eq("id", tradeId)
+      .single();
+    if (trade?.recipient_member_id === null) {
+      message = "Claim submitted — awaiting the commissioner gavel.";
+    }
+  }
+
   revalidatePath(`/leagues/${leagueId}/trades`);
-  return { message: "Trade proposed. Time to campaign." };
+  return { message };
 }
 
 export async function respondToTrade(_prev: ActionState, formData: FormData): Promise<ActionState> {

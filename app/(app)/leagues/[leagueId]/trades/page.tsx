@@ -15,12 +15,13 @@ export default async function TradesPage({
 
   const { data: league } = await supabase
     .from("leagues")
-    .select("id, status, trades_enabled, trade_approval_required, commissioner_id")
+    .select("id, status, trades_enabled, trade_approval_required, commissioner_id, season_id")
     .eq("id", leagueId)
     .single();
   if (!league) notFound();
 
-  const [{ data: myMember }, { data: rosterRows }, { data: trades }] = await Promise.all([
+  const [{ data: myMember }, { data: rosterRows }, { data: trades }, { data: seasonHouseguests }] =
+    await Promise.all([
     supabase
       .from("league_members")
       .select("id, team_name")
@@ -41,7 +42,21 @@ export default async function TradesPage({
       )
       .eq("league_id", leagueId)
       .order("created_at", { ascending: false }),
+    supabase
+      .from("houseguests")
+      .select("id, name, image_url, status")
+      .eq("season_id", league.season_id)
+      .order("name"),
   ]);
+
+  const ownedHouseguestIds = new Set(
+    (rosterRows ?? [])
+      .map((row) => row.houseguest?.id)
+      .filter((id): id is string => Boolean(id))
+  );
+  const leftoverHouseguests = (seasonHouseguests ?? []).filter(
+    (hg) => !ownedHouseguestIds.has(hg.id)
+  );
 
   return (
     <TradesBoard
@@ -49,6 +64,7 @@ export default async function TradesPage({
       myMemberId={myMember?.id ?? null}
       currentUserId={user!.id}
       rosterRows={rosterRows ?? []}
+      leftoverHouseguests={leftoverHouseguests}
       trades={trades ?? []}
     />
   );

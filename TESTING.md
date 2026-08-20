@@ -221,6 +221,16 @@ correctly (see §4.6).
   the *new* owner's total, not the original drafter (this is the trickiest
   part of the scoring model — worth double-checking).
   ```
+- [ ] If the league has **leftover houseguests** (cast count &gt; roster_size × teams):
+  ```
+  propose a trade sending one of yours for an **Unclaimed** guest in the You get
+  picker → status should be "Awaiting Commissioner" with no Accept/Reject step.
+  ```
+- [ ] As commissioner: **Approve** the unclaimed claim → proposer gains the floater,
+  ```
+  their sent guest becomes unclaimed (verify on Trades picker and roster pages).
+  ```
+- [ ] Propose another unclaimed claim and **Veto** it — no ownership change.
 
 
 

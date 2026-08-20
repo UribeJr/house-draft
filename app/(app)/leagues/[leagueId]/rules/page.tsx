@@ -140,8 +140,13 @@ export default async function RulesPage({
           <CardHeader band="pink">Trades</CardHeader>
           <CardContent className="space-y-3 text-sm text-zinc-700">
             <p>
-              Trades are 1-for-1. Accepted trades move houseguest ownership at the
-              execution timestamp.
+              Trades are 1-for-1. Swap with another team, or send one of yours to claim an
+              unclaimed houseguest floating in the house — your sent guest becomes the new
+              floater. Accepted trades move houseguest ownership at the execution timestamp.
+            </p>
+            <p className="text-zinc-600">
+              Unclaimed claims always need the commissioner&apos;s gavel, even when member
+              trades auto-execute.
             </p>
             <div className="flex flex-wrap gap-2">
               <Badge>
