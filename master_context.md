@@ -2,7 +2,7 @@
 
 Read this before touching anything. It captures the architecture, live infrastructure,
 non-obvious decisions, and the traps already discovered so you don't rediscover them.
-Last updated: 2026-08-19 (Diamond Veto Used scoring event).
+Last updated: 2026-09-07 (removed Made Jury scoring; Medieval Round Win).
 
 ## What this is
 
@@ -37,13 +37,13 @@ Default scoring rules are seeded by `create_league` into `scoring_rules`:
 | Nomination Chair (`NOMINATED`) | -3 |
 | Replacement Nominee (`REPLACEMENT_NOMINEE`) | -2 |
 | Evicted (`EVICTED`) | -3 |
-| Made Jury (`MADE_JURY`) | +10 |
 | Made Final 5 (`MADE_FINAL_5`) | +15 |
 | Made Final 3 (`MADE_FINAL_3`) | +20 |
 | Runner-Up (`RUNNER_UP`) | +30 |
 | Season Winner (`WINNER`) | +60 |
 | America's Favorite (`AMERICA_FAVORITE`) | +25 |
 | Block Buster Win (`BLOCK_BUSTER_WIN`) | +8 |
+| Medieval Round Win (`MEDIEVAL_ROUND_WIN`) | +2 |
 | Time Capsule Selected (`TIME_CAPSULE_SELECTED`) | +5 |
 | Time Capsule Power-Up (`TIME_CAPSULE_POWER`) | +3 |
 | Time Capsule Punishment (`TIME_CAPSULE_PUNISHMENT`) | -3 |

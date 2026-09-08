@@ -281,6 +281,7 @@ const EVENT_ICONS: Record<EventType, (props: IconProps) => React.JSX.Element> = 
   SAVED_WITH_VETO: KeyIcon,
   DIAMOND_VETO_USED: CrystalBallIcon,
   SURVIVED_EVICTION: CheckTokenIcon,
+  MEDIEVAL_ROUND_WIN: ShieldIcon,
   NOMINATED: ChairIcon,
   REPLACEMENT_NOMINEE: SwapArrowsIcon,
   EVICTED: DoorExitIcon,

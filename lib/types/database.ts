@@ -851,6 +851,7 @@ export type Database = {
         | "WINNER"
         | "AMERICA_FAVORITE"
         | "BLOCK_BUSTER_WIN"
+        | "MEDIEVAL_ROUND_WIN"
         | "TIME_CAPSULE_SELECTED"
         | "TIME_CAPSULE_POWER"
         | "TIME_CAPSULE_PUNISHMENT"
@@ -1005,6 +1006,7 @@ export const Constants = {
         "WINNER",
         "AMERICA_FAVORITE",
         "BLOCK_BUSTER_WIN",
+        "MEDIEVAL_ROUND_WIN",
         "TIME_CAPSULE_SELECTED",
         "TIME_CAPSULE_POWER",
         "TIME_CAPSULE_PUNISHMENT",
