@@ -55,6 +55,18 @@ Built for friends who watch together, commissioners who want clean scoring witho
 - Email/password auth via Supabase
 - League pages membership-gated; RLS is the real security boundary
 
+## Demo
+
+Live app: [house-draft.vercel.app](https://house-draft.vercel.app)
+
+| My leagues | Snake draft |
+| --- | --- |
+| ![My leagues dashboard](docs/readme/dashboard.png) | ![Snake draft room](docs/readme/draft-room.png) |
+
+| Leaderboard | Commissioner scoring |
+| --- | --- |
+| ![League leaderboard](docs/readme/leaderboard.png) | ![Score an Event](docs/readme/commissioner-score.png) |
+
 ---
 
 ## Quick Start
@@ -164,7 +176,7 @@ Lock/score finale placements and events → award prediction bonuses → champio
 
 ## Project status
 
-Actively developed through the Big Brother 28 season window (initial commit July 2026; ongoing scoring-rule and trade updates into September 2026). Core league loop is feature-complete for private playtesting; public launch polish (hosted demo URL, screenshots, license) is still open.
+Actively developed through the Big Brother 28 season window (initial commit July 2026; ongoing scoring-rule and trade updates into September 2026). Core league loop is feature-complete for private playtesting; public launch polish (license) is still open; live demo + screenshots are below.
 
 **Known limitations (honest):** draft room uses polling (not Realtime); trades are 1-for-1 only; single commissioner per league; no email notifications or payments (by design).
 
